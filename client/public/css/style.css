@@ -1,0 +1,30 @@
+.icon {
+    max-width: 200px;
+}
+
+body {
+    background-image: url("../images/desktop.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+html * {
+    font-family: 'Stylish', sans-serif !important;
+}
+
+.toolbar {
+    max-width: 75px;
+}
+
+#nav a {
+    color: white;
+    font-size: 30px
+}
+
+#right-top a {
+    color: white;
+
+    float: right;
+    margin: 10px;
+    font-size: 30px
+}

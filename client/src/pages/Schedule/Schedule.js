@@ -1,0 +1,459 @@
+import React, { Component } from "react";
+import DeleteBtn from "../../components/DeleteBtn";
+import Nav from "../../components/Nav";
+import Toolbar from "../../components/Toolbar";
+import Completed from "../../components/Completed";
+import "./Schedule.css";
+import API from "../../utils/API";
+import { Link } from "react-router-dom";
+import { Col, Row, Container } from "../../components/Grid";
+import { List, ListItem } from "../../components/List";
+import { Input, TextArea, FormBtn } from "../../components/Form";
+import Checkbox from "../../components/Checkbox/Checkbox";
+
+
+class Schedule extends Component {
+    state = {
+        Monday: "",
+        Tuesday: "",
+        Wednesday: "",
+        Thursday: "",
+        Friday: "",
+        Weekend:"",
+        tasks: [],
+        task: "",
+        label: "",
+        completed: ""
+    };
+
+    componentDidMount() {
+        this.loadTask();
+    }
+
+    loadTask = () => {
+        API.getTasks()
+          .then(res =>
+            this.setState({ tasks: res.data})
+          )
+          .catch(err => console.log(err));
+    };
+
+    deleteTask = id => {
+        API.deleteTask(id)
+          .then(res => this.loadTask())
+          .catch(err => console.log(err));
+    };
+
+    checkTask = id => {
+        
+        API.updateTask(id)
+          .then(res => this.loadTask())
+          .catch(err => console.log(err));
+    };
+
+
+    handleInputChange = event => {
+        const { value, name } = event.target;
+        this.setState({
+          [name]: value,
+          
+        });
+    };
+
+    handleFormSubmit = event => {
+        event.preventDefault();
+        const { name } = event.target;
+        console.log(name)
+        if (this.state[name]) {
+          API.saveTask({
+            task: this.state[name],
+            label: name,
+            completed: false
+          })
+            .then(res => this.loadTask())
+            .catch(err => console.log(err));
+        }
+    };
+
+    render() {
+        return (
+            <Container fluid>
+                <Row>
+                    <Col size="md-12">
+                    <div id="container">
+                            <div id="index">
+                        <Nav name="Schedule"/>
+                        <Toolbar />
+                            <div className="row align-center double-padded">
+                            <div className="nine twelfths">
+                            <div className="asphalt box align-center double-padded animated bounceInLeft">
+                                <h1>Do Weekly</h1>
+                            <div className="row align-center centered">
+                            <div className="yellow box four twelfths" id="day" >
+                                   <h2> Monday </h2>
+                                    
+                    
+              <List>                 
+                {this.state.tasks.map(task => {                
+                  if (task.label === "Monday" && (task.completed) % 2 == 0) {
+                  return (
+                  <ListItem  key={task._id}>                       
+                                     
+                  <Checkbox onClick={() => this.checkTask(task._id)} /> {task.task}
+                  
+                     
+                     <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                  </ListItem>
+                  );} 
+                  else if (task.label === "Monday" && (task.completed) % 2 == 1){
+                    return (
+                        <ListItem  key={task._id}>                       
+                                           
+                        <Completed onClick={() => this.checkTask(task._id)} /> <strike>{task.task}</strike>
+                        
+                           
+                           <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                        </ListItem>
+                        );  
+                  }
+                })}
+              </List>
+            <br></br>
+            <form>
+                <Input
+                    value={this.state.Monday}
+                    onChange={this.handleInputChange}
+                    name="Monday"
+                    placeholder="Add New Task"
+                    /> 
+                <FormBtn
+                    disabled={!(this.state.Monday)}
+                    onClick={this.handleFormSubmit}
+                    name="Monday"
+                     > +
+                </FormBtn>
+            </form>
+                    </div>
+                <div className="yellow box four twelfths holder" id="day">
+                <h2>Tuesday</h2>
+                     
+                <List>                 
+                {this.state.tasks.map(task => {                
+                  if (task.label === "Tuesday" && (task.completed) % 2 == 0) {
+                  return (
+                  <ListItem  key={task._id}>                       
+                                     
+                  <Checkbox onClick={() => this.checkTask(task._id)} /> {task.task}
+                  
+                     
+                     <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                  </ListItem>
+                  );} 
+                  else if (task.label === "Tuesday" && (task.completed) % 2 == 1){
+                    return (
+                        <ListItem  key={task._id}>                       
+                                           
+                        <Completed onClick={() => this.checkTask(task._id)} /> <strike>{task.task}</strike>
+                        
+                           
+                           <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                        </ListItem>
+                        );  
+                  }
+                })}
+              </List>
+
+  <br></br>
+            <form>
+                <Input
+                    value={this.state.Tuesday}
+                    onChange={this.handleInputChange}
+                    name="Tuesday"
+                    placeholder="Add New Task"
+                    /> 
+                <FormBtn
+                    disabled={!(this.state.Tuesday)}
+                    onClick={this.handleFormSubmit}
+                    name="Tuesday"
+                     > +
+                </FormBtn>
+            </form>
+                </div>
+                <div className="yellow box four twelfths holder" id="day">
+                <h2>Wednesday </h2>
+
+                    <List>                 
+                {this.state.tasks.map(task => {                
+                  if (task.label === "Wednesday" && (task.completed) % 2 == 0) {
+                  return (
+                  <ListItem  key={task._id}>                       
+                                     
+                  <Checkbox onClick={() => this.checkTask(task._id)} /> {task.task}
+                  
+                     
+                     <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                  </ListItem>
+                  );} 
+                  else if (task.label === "Wednesday" && (task.completed) % 2 == 1){
+                    return (
+                        <ListItem  key={task._id}>                       
+                                           
+                        <Completed onClick={() => this.checkTask(task._id)} /> <strike>{task.task}</strike>
+                        
+                           
+                           <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                        </ListItem>
+                        );  
+                  }
+                })}
+              </List>
+
+  <br></br>
+            <form>
+                <Input
+                    value={this.state.Wednesday}
+                    onChange={this.handleInputChange}
+                    name="Wednesday"
+                    placeholder="Add New Task"
+                    /> 
+                <FormBtn
+                    disabled={!(this.state.Wednesday)}
+                    onClick={this.handleFormSubmit}
+                    name="Wednesday"
+                     > +
+                </FormBtn>
+            </form>
+                </div>
+        </div>
+                <div className="row align-center centered">
+                <div className="yellow box four twelfths " id="day" >
+                <h2>Thursday </h2>
+
+                    <List>                 
+                {this.state.tasks.map(task => {                
+                  if (task.label === "Thursday" && (task.completed) % 2 == 0) {
+                  return (
+                  <ListItem  key={task._id}>                       
+                                     
+                  <Checkbox onClick={() => this.checkTask(task._id)} /> {task.task}
+                  
+                     
+                     <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                  </ListItem>
+                  );} 
+                  else if (task.label === "Thursday" && (task.completed) % 2 == 1){
+                    return (
+                        <ListItem  key={task._id}>                       
+                                           
+                        <Completed onClick={() => this.checkTask(task._id)} /> <strike>{task.task}</strike>
+                        
+                           
+                           <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                        </ListItem>
+                        );  
+                  }
+                })}
+              </List>
+              <br></br>
+            <form>
+                <Input
+                    value={this.state.Thursday}
+                    onChange={this.handleInputChange}
+                    name="Thursday"
+                    placeholder="Add New Task"
+                    /> 
+                <FormBtn
+                    disabled={!(this.state.Thursday)}
+                    onClick={this.handleFormSubmit}
+                    name="Thursday"
+                     > +
+                </FormBtn>
+            </form>
+         </div>
+                <div className="yellow box four twelfths " id="day">
+                <h2>Friday  </h2>
+                    
+                <List>                 
+                {this.state.tasks.map(task => {                
+                  if (task.label === "Friday" && (task.completed) % 2 == 0) {
+                  return (
+                  <ListItem  key={task._id}>                       
+                                     
+                  <Checkbox onClick={() => this.checkTask(task._id)} /> {task.task}
+                  
+                     
+                     <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                  </ListItem>
+                  );} 
+                  else if (task.label === "Friday" && (task.completed) % 2 == 1){
+                    return (
+                        <ListItem  key={task._id}>                       
+                                           
+                        <Completed onClick={() => this.checkTask(task._id)} /> <strike>{task.task}</strike>
+                        
+                           
+                           <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                        </ListItem>
+                        );  
+                  }
+                })}
+              </List>
+
+                    <br></br>
+            <form>
+                <Input
+                    value={this.state.Friday}
+                    onChange={this.handleInputChange}
+                    name="Friday"
+                    placeholder="Add New Task"
+                    /> 
+                <FormBtn
+                    disabled={!(this.state.Friday)}
+                    onClick={this.handleFormSubmit}
+                    name="Friday"
+                     > +
+                </FormBtn>
+            </form>
+        </div>
+                <div className="yellow box four twelfths " id="day">
+                <h2> Sat / Sun</h2>
+
+                 <List>                 
+                {this.state.tasks.map(task => {                
+                  if (task.label === "Weekend" && (task.completed) % 2 == 0) {
+                  return (
+                  <ListItem  key={task._id}>                       
+                                     
+                  <Checkbox onClick={() => this.checkTask(task._id)} /> {task.task}
+                  
+                     
+                     <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                  </ListItem>
+                  );} 
+                  else if (task.label === "Weekend" && (task.completed) % 2 == 1){
+                    return (
+                        <ListItem  key={task._id}>                       
+                                           
+                        <Completed onClick={() => this.checkTask(task._id)} /> <strike>{task.task}</strike>
+                        
+                           
+                           <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                        </ListItem>
+                        );  
+                  }
+                })}
+              </List>
+
+                <br></br>
+            <form>
+                <Input
+                    value={this.state.Weekend}
+                    onChange={this.handleInputChange}
+                    name="Weekend"
+                    placeholder="Add New Task"
+                    /> 
+                <FormBtn
+                    disabled={!(this.state.Weekend)}
+                    onClick={this.handleFormSubmit}
+                    name="Weekend"
+                     > +
+                </FormBtn>
+            </form>
+         </div>
+             </div>
+
+    </div>
+   </div>
+                                                <div className="three twelfths" id="doOnce">
+                                                    <div className="yellow box align-center double-padded animated bounceInRight">
+                                                        <h1>Do Once</h1>
+                                                        <div className="row align-center centered">
+                            <div className="yellow box">
+                                                       
+                            <List>                 
+                {this.state.tasks.map(task => {                
+                  if (task.label === "DoOnce" && (task.completed) % 2 == 0) {
+                  return (
+                  <ListItem  key={task._id}>                       
+                                     
+                  <Checkbox onClick={() => this.checkTask(task._id)} /> {task.task}
+                  
+                     
+                     <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                  </ListItem>
+                  );} 
+                  else if (task.label === "DoOnce" && (task.completed) % 2 == 1){
+                    return (
+                        <ListItem  key={task._id}>                       
+                                           
+                        <Completed onClick={() => this.checkTask(task._id)} /> <strike>{task.task}</strike>
+                        
+                           
+                           <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                        </ListItem>
+                        );  
+                  }
+                })}
+              </List>
+              <br></br>
+            <form>
+                <Input
+                    value={this.state.DoOnce}
+                    onChange={this.handleInputChange}
+                    name="DoOnce"
+                    placeholder="Add New Task"
+                    /> 
+                <FormBtn
+                    disabled={!(this.state.DoOnce)}
+                    onClick={this.handleFormSubmit}
+                    name="DoOnce"
+                     > +
+                </FormBtn>
+            </form>
+                </div>
+                </div>                                            
+            </div>
+            
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div className="row align-center triple-padded">
+                                                <div className="one third center">
+                                                    <button className="green animated bounceInUp">Share Tasks</button>
+                                                </div>
+                                            </div>
+                                            <div className="row align-center triple-padded">
+                                                <div className="one third center">
+                                                    <button className="green animated bounceInUp">Import Shared Tasks</button>
+                                                </div>
+                                            </div>
+                                            </div>
+                                       
+                                    
+                                  
+                    
+                        
+                    </Col>
+                </Row>
+            </Container>
+                        );
+                    }
+                }
+                
+                
+
+                
+
+
+
+
+
+
+
+
+
+                export default Schedule;
