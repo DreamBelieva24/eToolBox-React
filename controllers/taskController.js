@@ -2,6 +2,9 @@ console.log("got to controller")
 
 const db = require("../models");
 
+
+
+
 // Defining methods for the tasksController
 module.exports = {
   findAll: function(req, res) {
@@ -19,6 +22,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+
     db.Task
       .create(req.body)
       .then(dbModel => res.json(dbModel))

@@ -58,6 +58,7 @@ class App extends Component {
               <div className="one fifth skip-two" id="right-top">
               {this.state.authenticated ? (
                 <div >
+                
                   <Link to="/logout">Log out</Link>
                 </div>
               ) : (

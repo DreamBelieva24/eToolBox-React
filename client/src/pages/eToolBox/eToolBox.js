@@ -18,24 +18,31 @@ const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Weeke
 var currentDay = weekdays[n-1] || "Weekend";
 console.log(currentDay)
 
+
+
 class eToolBox extends Component {
     state = {
         Monday: "",
         tasks: [],
         task: "",
         label: "",
+        user: ""
+        
     };
 
     componentDidMount() {
         this.loadTask();
+        
     }
 
     loadTask = () => {
         API.getTasks()
           .then(res =>
             this.setState({ tasks: res.data})
+            
           )
           .catch(err => console.log(err));
+          
     };
     deleteTask = id => {
         API.deleteTask(id)
