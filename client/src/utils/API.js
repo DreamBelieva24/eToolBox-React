@@ -39,12 +39,5 @@ export default {
         return axios.post("/api/task", taskData, {headers: {Authorization: `bearer ${token}`}});
       },
     
-      saveUser: function(userData) {
-        console.log(userData);
-        return axios.post("/api/user", userData);
-      },
-      signup: function(user) {
-        console.log('signup', user);
-        return axios.post('/signup', user);
-      }
+      
     };

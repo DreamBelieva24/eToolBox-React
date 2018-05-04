@@ -21,6 +21,8 @@ import SignUpPage from './pages/SignUpPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
 import eToolBox from './pages/eToolBox';
 import Schedule from './pages/Schedule';
+import Notebook from './pages/Notebook';
+import Bookmarks from './pages/Bookmarks';
 
 
 import Auth from './utils/Auth';
@@ -72,7 +74,9 @@ class App extends Component {
             <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
             <LoggedOutRoute path="/signup" component={SignUpPage}/>
             <Route path="/logout" component={LogoutFunction}/>
-            <Route exact path="/schedule" component={Schedule} toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
+            <Route exact path="/schedule" component={Schedule} />
+            <Route exact path="/notebook" component={Notebook} />
+            <Route exact path="/bookmarks" component={Bookmarks} />
           </div>
 
         </Router>
