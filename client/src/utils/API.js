@@ -24,11 +24,10 @@ export default {
       updateTask: function(id) {
         console.log(id);
         const token = Auth.getToken();
-        console.log(token);
         const options = {
           method: 'PUT',
           headers: { 'Authorization': `bearer ${token}` },
-          url: '/api/task/' + id,
+          url: '/api/task/' + id
         };
         return axios(options);
       },

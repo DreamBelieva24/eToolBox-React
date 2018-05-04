@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require("path");
 const passport = require('passport');
-const config = require('./server/config');
+const config = require('./config/database.js');
 const logger = require('morgan')
 const PORT = process.env.PORT || 3001;
 
