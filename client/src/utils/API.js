@@ -24,7 +24,13 @@ export default {
       updateTask: function(id) {
         console.log(id);
         const token = Auth.getToken();
-        return axios.put("/api/task/" + id, {headers: {Authorization: `bearer ${token}`}});
+        console.log(token);
+        const options = {
+          method: 'PUT',
+          headers: { 'Authorization': `bearer ${token}` },
+          url: '/api/task/' + id,
+        };
+        return axios(options);
       },
       // Deletes the task with the given id
       deleteTask: function(id) {
