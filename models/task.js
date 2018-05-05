@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
-  task: { type: String, required: true },
+  task: { type: String, required: false },
   label: { type: String, required: false },
-  completed: {type: Number},
-  username: {type: String, required: true}
+  completed: {type: Number, required: false},
+  username: {type: String, required: true},
+  subscription: {type: String, required: false}
   
 });
 

@@ -1,5 +1,3 @@
-console.log("got to tasks")
-
 const router = require("express").Router();
 const taskController = require("../../controllers/taskController");
 

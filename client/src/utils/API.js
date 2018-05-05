@@ -21,6 +21,11 @@ export default {
         const token = Auth.getToken();
         return axios.get("/api/task", {headers: {Authorization: `bearer ${token}`}});
       },
+      getSubscriptions: function() {
+        const token = Auth.getToken();
+        return axios.get("/api/subscriptions", {headers: {Authorization: `bearer ${token}`}});
+        
+      },
       // Gets the task with the given id
       getTask: function(id) {
         console.log(id);
@@ -44,6 +49,11 @@ export default {
         const token = Auth.getToken();
         return axios.delete("/api/task/" + id, {headers: {Authorization: `bearer ${token}`}});
       },
+      unsubscribe: function(id) {
+        console.log(id);
+        const token = Auth.getToken();
+        return axios.delete("/api/subscriptions/" + id, {headers: {Authorization: `bearer ${token}`}});
+      },
       // Saves a task to the database
       saveTask: function(taskData) {
         console.log(taskData);
@@ -51,5 +61,9 @@ export default {
         return axios.post("/api/task", taskData, {headers: {Authorization: `bearer ${token}`}});
       },
     
-      
+      subscribe: function(taskData) {
+        console.log(taskData);
+        const token = Auth.getToken();
+        return axios.post("/api/subscriptions", taskData, {headers: {Authorization: `bearer ${token}`}});
+      },
     };

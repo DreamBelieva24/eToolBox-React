@@ -3,15 +3,16 @@ const taskController = require("../../controllers/taskController");
 
 const router = new express.Router();
 
-// router.get('/getUser', (req, res) => {
-//   console.log("REQ");
-//   return res.status(200).json({
-//     message: "You're authorized to see this secret message.",
-//     // user values passed through from auth middleware
-//     user: "things"
-    
-//   });
-// });
+// Matches with "/api/task"
+router.route("/subscriptions")
+  .get(taskController.findAll)
+  .post(taskController.create);
+
+  router
+  .route("/subscriptions/:id")
+  .get(taskController.findById)
+  .put(taskController.update)
+  .delete(taskController.remove);
 
 // Matches with "/api/task"
 router.route("/getUser")

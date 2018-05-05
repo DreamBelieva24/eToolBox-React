@@ -15,13 +15,15 @@ class Notebook extends Component {
         tasks: [],
         task: "",
         username: "",
-        subscribed: [],
-        show: false
+        subscriptions: [],
+        show: false,
+        subscription: ""
     };
 
     componentDidMount() {
         this.loadTask();
         this.getUser();
+        this.loadSubscriptions();
     }
 
     getUser = () => {
@@ -33,6 +35,15 @@ class Notebook extends Component {
         )
     };
 
+    loadSubscriptions = () => {
+        API.getSubscriptions()
+            .then(res =>
+                this.setState({ subscriptions: res.data })
+            )
+            .catch(err => console.log(err));
+    };
+
+
     loadTask = () => {
         API.getTasks()
             .then(res =>
@@ -43,6 +54,12 @@ class Notebook extends Component {
 
     deleteTask = id => {
         API.deleteTask(id)
+            .then(res => this.loadSubscriptions())
+            .catch(err => console.log(err));
+    };
+
+    unsubscribe = id => {
+        API.unsubscribe(id)
             .then(res => this.loadTask())
             .catch(err => console.log(err));
     };
@@ -71,6 +88,20 @@ class Notebook extends Component {
         }
     };
 
+    handleModalSubmit = event => {
+        event.preventDefault();
+        const { name } = event.target;
+        if (this.state[name]) {
+            API.subscribe({
+                username: this.state.username,
+                subscription: this.state[name]
+
+            })
+                .then(res => this.loadTask())
+                .catch(err => console.log(err));
+        }
+    };
+
     handleClose = () => {
         this.setState({ show: false });
       }
@@ -79,6 +110,10 @@ class Notebook extends Component {
         this.setState({ show: true });
       }
 
+    handleClick = event => {
+        this.handleModalSubmit(event);
+        this.loadSubscriptions();
+    }
 
     render() {
         return (
@@ -170,10 +205,43 @@ class Notebook extends Component {
                     onHide={this.handleClose}>
                         <h1 className="centered">Subscribe to a Notebook</h1>
                         <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title></Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Text in a modal</h4>
+            <h4>Subscribe to a Notebook by entering the Notebook's code here. </h4>
+                       <Input
+                            value={this.state.Subscription}
+                            onChange={this.handleInputChange}
+                            name="Subscription"
+                            placeholder="Add Code Here"
+                        />
+                            <FormBtn
+                                disabled={!(this.state.Subscription)}
+                                onClick={this.handleClick}
+                                name="Subscription"
+                            > Submit
+                                                </FormBtn><br></br><hr></hr>
+                                                Your Notebook Code: {this.state.username}
+                                                <hr></hr>
+                                                Your current subscriptions:
+                                                <List>
+                                                {this.state.subscriptions.map(subscription => {
+                                                if (subscription.username === this.state.username) {
+                                                    return (
+                                                        <ListItem key={subscription._id}>
+
+                                                            {subscription.subscription}
+                                                            <DeleteBtn onClick={() => {
+                                                                this.unsubscribe(subscription._id)
+                                                                this.loadSubscriptions()}} />
+
+                                                            
+                                                        </ListItem>
+                                                    );
+                                                }
+                                            })}
+                                        </List>
+                                            
             </ Modal.Body>
             <Modal.Footer>
             <Button onClick={this.handleClose}>Close</Button>
