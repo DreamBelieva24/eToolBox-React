@@ -65,7 +65,7 @@ class Notebook extends Component {
                        <Nav name="Notebook"/>
                        <Toolbar />
     
-    <div className="row">
+    <div className="row padded">
     
     
             <div className="yellow box padded animated bounceInLeft six twelfths gapped">
@@ -86,7 +86,7 @@ class Notebook extends Component {
                 })}
               </List>
               <form>
-                <Input
+                <TextArea
                     value={this.state.Notes}
                     onChange={this.handleInputChange}
                     name="Notes"
@@ -107,7 +107,7 @@ class Notebook extends Component {
         
     
     <div className="five twelfths asphalt box padded animated bounceInRight">
-    <button className="green animated bounceInUp">Subscribe to Notebook</button>
+    <button className="green animated bounceInRight">Subscribe to Notebook</button>
     <hr></hr>
                 <h1>Subscribed Notebooks</h1>
                 

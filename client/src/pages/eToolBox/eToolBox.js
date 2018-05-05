@@ -9,6 +9,7 @@ import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import axios from "axios";
 
     var d = new Date();
     var n = d.getDay()
@@ -19,27 +20,34 @@ var currentDay = weekdays[n-1] || "Weekend";
 console.log(currentDay)
 
 
-
 class eToolBox extends Component {
     state = {
         Monday: "",
         tasks: [],
         task: "",
         label: "",
-        user: ""
+        username: ""
         
     };
 
     componentDidMount() {
         this.loadTask();
-        
-    }
+       this.getUser();
+    };
+
+getUser = () => {
+    API.getUser()
+    .then(res => {
+     this.setState({ username: res.data.username})
+    console.log(this.state.username);
+    },
+    )};
+
 
     loadTask = () => {
         API.getTasks()
           .then(res =>
-            this.setState({ tasks: res.data})
-            
+            this.setState({ tasks: res.data}),
           )
           .catch(err => console.log(err));
           
@@ -89,7 +97,7 @@ class eToolBox extends Component {
                             <div className="five twelfths skip-one gapped"></div>
                             <div className="five twelfths skip-one gapped">
                                 <div className="asphalt box align-center animated bounceInLeft">
-                                    <h1>Quick Look</h1>
+                                    <h1>Quick Look </h1>
                                     <hr></hr>
                                     <div className="yellow box align-center animated bounceInLeft">
                                     <h2>Today's Tasks</h2> 
@@ -142,10 +150,7 @@ class eToolBox extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="row align-center triple-padded">
-                            <div className="one third centered">
-                                <button className="green animated bounceInUp padded">Set As Homepage</button></div>
-                        </div>
+                        
                         </div>
                         
                     </Col>

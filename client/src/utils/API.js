@@ -5,10 +5,17 @@ import Auth from "./Auth";
 export default {
   login: userData => 
      axios.post("/auth/login",  userData),
+     
   signUp: userData => 
   	 axios.post('/auth/signup', userData),
   dashboard: token =>
      axios.get('/api/dashboard', {headers: {Authorization: `bearer ${token}`}}),
+     
+  getUser: function() {
+    const token = Auth.getToken();
+    return axios.get('/api/getUser', {headers: {Authorization: `bearer ${token}`}})
+  },
+    
 
       getTasks: function() {
         const token = Auth.getToken();
@@ -20,7 +27,7 @@ export default {
         const token = Auth.getToken();
         return axios.get("/api/task/" + id, {headers: {Authorization: `bearer ${token}`}});
       },
-    
+
       updateTask: function(id) {
         console.log(id);
         const token = Auth.getToken();

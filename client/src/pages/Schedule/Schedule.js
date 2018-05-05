@@ -420,17 +420,6 @@ class Schedule extends Component {
                                                 </div>
                                             </div>
 
-
-                                            <div className="row align-center triple-padded">
-                                                <div className="one third center">
-                                                    <button className="green animated bounceInUp">Share Tasks</button>
-                                                </div>
-                                            </div>
-                                            <div className="row align-center triple-padded">
-                                                <div className="one third center">
-                                                    <button className="green animated bounceInUp">Import Shared Tasks</button>
-                                                </div>
-                                            </div>
                                             </div>
                                        
                                     

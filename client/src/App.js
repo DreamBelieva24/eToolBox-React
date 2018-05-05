@@ -52,13 +52,14 @@ class App extends Component {
         <Router>
           <div>
           <div className="row align-center animated bounceInDown" id="nav">
-          <div className="one fifth gapped" >
+          <div className="one sixth triple-gapped" >
+           
           <Link to="/"> eToolBox </Link>
+          
           </div>
-              <div className="one fifth skip-two" id="right-top">
+          <div className="one sixth triple-gapped skip-three" id="right-top">
               {this.state.authenticated ? (
                 <div >
-                
                   <Link to="/logout">Log out</Link>
                 </div>
               ) : (
