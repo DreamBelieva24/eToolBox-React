@@ -6,7 +6,7 @@ import Toolbar from "../../components/Toolbar";
 import { Button, Modal } from 'react-bootstrap';
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
+import { List, ListItem} from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 
 class Notebook extends Component {
@@ -115,6 +115,11 @@ class Notebook extends Component {
         this.loadSubscriptions();
     }
 
+    handleDelete = id => {
+        this.unsubscribe(id);
+        this.loadSubscriptions();
+    }
+
     render() {
         return (
             <Container fluid>
@@ -175,19 +180,37 @@ class Notebook extends Component {
                                     <div className="row centered">
                                         <div className="one whole padded">
                                             <List>
-                                                {this.state.tasks.map(task => {
-                                                    if (task.label === "Notes") {
-                                                        return (
-                                                            <ListItem key={task._id}>
-
-                                                                {task.task}
-
-                                                            </ListItem>
-                                                        );
+                                            {this.state.subscriptions.map(subscription => {
+                                                    if (subscription.subscription && subscription.username === this.state.username) {
+                                    
+                                                                return (
+                                                                    <div key={subscription._id}>
+                                                                    From: {subscription.subscription}
+                                                                        {this.state.tasks.map(task => {
+                                        
+                                                                            if (subscription.subscription === task.username && task.label === "Notes") {
+                                                                                return (
+                                                                                    <div>
+                                                                                    
+                                                                                    <ListItem key={task._id}>
+                                                                                    {task.task}
+                                                                                    </ListItem>
+                                                                                    </div>
+                                                                                )
+                                                                            }
+                                                                        })} 
+                                                                    </div>
+                                                                )
+                                                            }
+                                                        
                                                     }
-                                                })}
-                                            </List>
 
+
+
+
+                                                )}
+                                            </List>
+                                            
 
                                         </div>
                                     </div>
@@ -226,14 +249,12 @@ class Notebook extends Component {
                                                 Your current subscriptions:
                                                 <List>
                                                 {this.state.subscriptions.map(subscription => {
-                                                if (subscription.username === this.state.username) {
+                                                if (subscription.subscription && subscription.username === this.state.username) {
                                                     return (
                                                         <ListItem key={subscription._id}>
 
                                                             {subscription.subscription}
-                                                            <DeleteBtn onClick={() => {
-                                                                this.unsubscribe(subscription._id)
-                                                                this.loadSubscriptions()}} />
+                                                            <DeleteBtn onClick={() => this.handleDelete(subscription._id)}  />
 
                                                             
                                                         </ListItem>

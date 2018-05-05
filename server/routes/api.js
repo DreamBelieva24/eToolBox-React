@@ -16,8 +16,7 @@ router.route("/subscriptions")
 
 // Matches with "/api/task"
 router.route("/getUser")
-  // .get((req, res) => res.json(
-  //   {things:"hello"}
+ 
     .get(taskController.getUser)
   ;
 
