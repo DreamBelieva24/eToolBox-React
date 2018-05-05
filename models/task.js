@@ -6,7 +6,8 @@ const Schema = mongoose.Schema;
 const taskSchema = new Schema({
   task: { type: String, required: true },
   label: { type: String, required: false },
-  completed: {type: Number}
+  completed: {type: Number},
+  username: {type: String, required: true}
   
 });
 

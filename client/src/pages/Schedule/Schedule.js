@@ -23,12 +23,22 @@ class Schedule extends Component {
         tasks: [],
         task: "",
         label: "",
-        completed: ""
+        completed: "",
+        username: ""
     };
 
     componentDidMount() {
         this.loadTask();
+        this.getUser();
     }
+
+    getUser = () => {
+        API.getUser()
+        .then(res => {
+        this.setState({ username: res.data.username})
+        console.log(this.state.username);
+    },
+    )};
 
     loadTask = () => {
         API.getTasks()
@@ -68,7 +78,8 @@ class Schedule extends Component {
           API.saveTask({
             task: this.state[name],
             label: name,
-            completed: false
+            completed: false,
+            username: this.state.username
           })
             .then(res => this.loadTask())
             .catch(err => console.log(err));
@@ -95,7 +106,7 @@ class Schedule extends Component {
                     
               <List>                 
                 {this.state.tasks.map(task => {                
-                  if (task.label === "Monday" && (task.completed) % 2 == 0) {
+                  if (task.username === this.state.username && task.label === "Monday" && (task.completed) % 2 == 0) {
                   return (
                   <ListItem  key={task._id}>                       
                                      
@@ -105,7 +116,7 @@ class Schedule extends Component {
                      <DeleteBtn onClick={() => this.deleteTask(task._id)} />
                   </ListItem>
                   );} 
-                  else if (task.label === "Monday" && (task.completed) % 2 == 1){
+                  else if (task.username === this.state.username && task.label === "Monday" && (task.completed) % 2 == 1){
                     return (
                         <ListItem  key={task._id}>                       
                                            
@@ -139,7 +150,7 @@ class Schedule extends Component {
                      
                 <List>                 
                 {this.state.tasks.map(task => {                
-                  if (task.label === "Tuesday" && (task.completed) % 2 == 0) {
+                  if (task.username === this.state.username && task.label === "Tuesday" && (task.completed) % 2 == 0) {
                   return (
                   <ListItem  key={task._id}>                       
                                      
@@ -149,7 +160,7 @@ class Schedule extends Component {
                      <DeleteBtn onClick={() => this.deleteTask(task._id)} />
                   </ListItem>
                   );} 
-                  else if (task.label === "Tuesday" && (task.completed) % 2 == 1){
+                  else if (task.username === this.state.username && task.label === "Tuesday" && (task.completed) % 2 == 1){
                     return (
                         <ListItem  key={task._id}>                       
                                            
@@ -184,7 +195,7 @@ class Schedule extends Component {
 
                     <List>                 
                 {this.state.tasks.map(task => {                
-                  if (task.label === "Wednesday" && (task.completed) % 2 == 0) {
+                  if (task.username === this.state.username && task.label === "Wednesday" && (task.completed) % 2 == 0) {
                   return (
                   <ListItem  key={task._id}>                       
                                      
@@ -194,7 +205,7 @@ class Schedule extends Component {
                      <DeleteBtn onClick={() => this.deleteTask(task._id)} />
                   </ListItem>
                   );} 
-                  else if (task.label === "Wednesday" && (task.completed) % 2 == 1){
+                  else if (task.username === this.state.username && task.label === "Wednesday" && (task.completed) % 2 == 1){
                     return (
                         <ListItem  key={task._id}>                       
                                            
@@ -231,7 +242,7 @@ class Schedule extends Component {
 
                     <List>                 
                 {this.state.tasks.map(task => {                
-                  if (task.label === "Thursday" && (task.completed) % 2 == 0) {
+                  if (task.username === this.state.username && task.label === "Thursday" && (task.completed) % 2 == 0) {
                   return (
                   <ListItem  key={task._id}>                       
                                      
@@ -241,7 +252,7 @@ class Schedule extends Component {
                      <DeleteBtn onClick={() => this.deleteTask(task._id)} />
                   </ListItem>
                   );} 
-                  else if (task.label === "Thursday" && (task.completed) % 2 == 1){
+                  else if (task.username === this.state.username && task.label === "Thursday" && (task.completed) % 2 == 1){
                     return (
                         <ListItem  key={task._id}>                       
                                            
@@ -275,7 +286,7 @@ class Schedule extends Component {
                     
                 <List>                 
                 {this.state.tasks.map(task => {                
-                  if (task.label === "Friday" && (task.completed) % 2 == 0) {
+                  if (task.username === this.state.username && task.label === "Friday" && (task.completed) % 2 == 0) {
                   return (
                   <ListItem  key={task._id}>                       
                                      
@@ -285,7 +296,7 @@ class Schedule extends Component {
                      <DeleteBtn onClick={() => this.deleteTask(task._id)} />
                   </ListItem>
                   );} 
-                  else if (task.label === "Friday" && (task.completed) % 2 == 1){
+                  else if (task.username === this.state.username && task.label === "Friday" && (task.completed) % 2 == 1){
                     return (
                         <ListItem  key={task._id}>                       
                                            
@@ -320,7 +331,7 @@ class Schedule extends Component {
 
                  <List>                 
                 {this.state.tasks.map(task => {                
-                  if (task.label === "Weekend" && (task.completed) % 2 == 0) {
+                  if (task.username === this.state.username && task.label === "Weekend" && (task.completed) % 2 == 0) {
                   return (
                   <ListItem  key={task._id}>                       
                                      
@@ -372,7 +383,7 @@ class Schedule extends Component {
                                                        
                             <List>                 
                 {this.state.tasks.map(task => {                
-                  if (task.label === "DoOnce" && (task.completed) % 2 == 0) {
+                  if (task.username === this.state.username && task.label === "DoOnce" && (task.completed) % 2 == 0) {
                   return (
                   <ListItem  key={task._id}>                       
                                      
@@ -382,7 +393,7 @@ class Schedule extends Component {
                      <DeleteBtn onClick={() => this.deleteTask(task._id)} />
                   </ListItem>
                   );} 
-                  else if (task.label === "DoOnce" && (task.completed) % 2 == 1){
+                  else if (task.username === this.state.username && task.label === "DoOnce" && (task.completed) % 2 == 1){
                     return (
                         <ListItem  key={task._id}>                       
                                            

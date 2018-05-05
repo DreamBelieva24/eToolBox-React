@@ -23,9 +23,15 @@ console.log(currentDay)
 class eToolBox extends Component {
     state = {
         Monday: "",
+        Tuesday: "",
+        Wednesday: "",
+        Thursday: "",
+        Friday: "",
+        Weekend:"",
         tasks: [],
         task: "",
         label: "",
+        completed: "",
         username: ""
         
     };
@@ -35,11 +41,11 @@ class eToolBox extends Component {
        this.getUser();
     };
 
-getUser = () => {
-    API.getUser()
-    .then(res => {
-     this.setState({ username: res.data.username})
-    console.log(this.state.username);
+    getUser = () => {
+        API.getUser()
+        .then(res => {
+        this.setState({ username: res.data.username})
+        console.log(this.state.username);
     },
     )};
 
@@ -78,7 +84,8 @@ getUser = () => {
         if (this.state[name]) {
           API.saveTask({
             task: this.state[name],
-            label: name
+            label: name,
+            username: this.state.username
         
           })
             .then(res => this.loadTask())
@@ -104,7 +111,7 @@ getUser = () => {
                                     <h3>{currentDay}</h3>
                                     <List>                 
                 {this.state.tasks.map(task => {                
-                  if (task.label === currentDay && (task.completed) % 2 == 0) {
+                  if (task.username === this.state.username && task.label === currentDay && (task.completed) % 2 == 0) {
                   return (
                   <ListItem  key={task._id}>                       
                                      
@@ -114,7 +121,7 @@ getUser = () => {
                      <DeleteBtn onClick={() => this.deleteTask(task._id)} />
                   </ListItem>
                   );} 
-                  else if (task.label === currentDay && (task.completed) % 2 == 1){
+                  else if (task.username === this.state.username && task.label === currentDay && (task.completed) % 2 == 1){
                     return (
                         <ListItem  key={task._id}>                       
                                            
