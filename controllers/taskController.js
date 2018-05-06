@@ -19,7 +19,8 @@ module.exports = {
     db.Task
     .find(req.query)
     .then(dbModel => res.json(
-        {username: req.user._id}))
+        {username: req.user._id,
+          name: req.user.name}))
   },
   findById: function(req, res) {
     db.Task

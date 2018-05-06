@@ -8,7 +8,8 @@ const taskSchema = new Schema({
   label: { type: String, required: false },
   completed: {type: Number, required: false},
   username: {type: String, required: true},
-  subscription: {type: String, required: false}
+  subscription: {type: String, required: false},
+  name:{type: String, required: false}
   
 });
 

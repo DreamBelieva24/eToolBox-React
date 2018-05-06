@@ -17,7 +17,8 @@ class Notebook extends Component {
         username: "",
         subscriptions: [],
         show: false,
-        subscription: ""
+        subscription: "",
+        name: ""
     };
 
     componentDidMount() {
@@ -29,7 +30,8 @@ class Notebook extends Component {
     getUser = () => {
         API.getUser()
             .then(res => {
-                this.setState({ username: res.data.username })
+                this.setState({ username: res.data.username,
+                name: res.data.name })
                 console.log(this.state.username);
             },
         )
@@ -54,13 +56,13 @@ class Notebook extends Component {
 
     deleteTask = id => {
         API.deleteTask(id)
-            .then(res => this.loadSubscriptions())
+            .then(res => this.loadTask())
             .catch(err => console.log(err));
     };
 
     unsubscribe = id => {
         API.unsubscribe(id)
-            .then(res => this.loadTask())
+            .then(res => this.loadSubscriptions())
             .catch(err => console.log(err));
     };
 
@@ -80,7 +82,8 @@ class Notebook extends Component {
             API.saveTask({
                 task: this.state[name],
                 label: name,
-                username: this.state.username
+                username: this.state.username,
+                name: this.state.name
 
             })
                 .then(res => this.loadTask())
@@ -117,7 +120,7 @@ class Notebook extends Component {
 
     handleDelete = id => {
         this.unsubscribe(id);
-        this.loadSubscriptions();
+        
     }
 
     render() {
@@ -142,7 +145,7 @@ class Notebook extends Component {
                                                     if (task.username === this.state.username && task.label === "Notes") {
                                                         return (
                                                             <ListItem key={task._id}>
-
+                                                                    
                                                                 {task.task}
 
                                                                 <DeleteBtn onClick={() => this.deleteTask(task._id)} />
@@ -187,18 +190,21 @@ class Notebook extends Component {
                                                                     <div key={subscription._id}>
                                                                     From: {subscription.subscription}
                                                                         {this.state.tasks.map(task => {
-                                        
+                                    
                                                                             if (subscription.subscription === task.username && task.label === "Notes") {
                                                                                 return (
                                                                                     <div>
                                                                                     
                                                                                     <ListItem key={task._id}>
                                                                                     {task.task}
+                                                                                    
                                                                                     </ListItem>
+                                                                                    
                                                                                     </div>
                                                                                 )
                                                                             }
                                                                         })} 
+                                                                       
                                                                     </div>
                                                                 )
                                                             }
