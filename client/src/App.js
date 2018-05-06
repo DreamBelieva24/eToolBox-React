@@ -23,6 +23,7 @@ import eToolBox from './pages/eToolBox';
 import Schedule from './pages/Schedule';
 import Notebook from './pages/Notebook';
 import Bookmarks from './pages/Bookmarks';
+import Main from './pages/Main';
 
 
 import Auth from './utils/Auth';
@@ -103,7 +104,7 @@ class App extends Component {
                       </div>
                   </div>
                     
-                  <Route exact path="/" component={eToolBox} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
+                  <Route exact path="/" component={Main} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
                   <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
                   <LoggedOutRoute path="/signup" component={SignUpPage}/>
                   <Route path="/logout" component={LogoutFunction}/>
