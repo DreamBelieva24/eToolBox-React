@@ -47,44 +47,73 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <Router>
-          <div>
-          <div className="row align-center animated bounceInDown" id="nav">
-          <div className="one sixth triple-gapped" >
-           
-          <Link to="/"> eToolBox </Link>
-          
-          </div>
-          <div className="one sixth triple-gapped skip-three" id="right-top">
-              {this.state.authenticated ? (
-                <div >
-                  <Link to="/logout">Log out</Link>
-                </div>
-              ) : (
-                <div >
-                  <Link to="/login">Log in</Link> &nbsp; / &nbsp; 
-                  <Link to="/signup">Sign up</Link>
-                </div>
-              )}
-                </div>
-            </div>
+    if (this.state.authenticated) {
+    
+      return (
+          <MuiThemeProvider muiTheme={getMuiTheme()}>
+            <Router>
+              <div>
+              <div className="row align-center animated bounceInDown" id="nav">
+              <div className="one sixth triple-gapped" >
+               
+              <Link to="/"> eToolBox </Link>
               
-            <Route exact path="/" component={eToolBox} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
-            <PrivateRoute path="/dashboard" component={eToolBox}/>
-            <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
-            <LoggedOutRoute path="/signup" component={SignUpPage}/>
-            <Route path="/logout" component={LogoutFunction}/>
-            <Route exact path="/schedule" component={Schedule} />
-            <Route exact path="/notebook" component={Notebook} />
-            <Route exact path="/bookmarks" component={Bookmarks} />
-          </div>
+              </div>
+              <div className="one sixth triple-gapped skip-three" id="right-top">
+                    <div >
+                      <Link to="/logout">Log out</Link>
+                    </div>
+                    </div>
+                </div>
+                  
+                <Route exact path="/" component={eToolBox} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
+                <PrivateRoute path="/dashboard" component={eToolBox}/>
+                <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
+                <LoggedOutRoute path="/signup" component={SignUpPage}/>
+                <Route path="/logout" component={LogoutFunction} toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
+                <Route exact path="/schedule" component={Schedule} />
+                <Route exact path="/notebook" component={Notebook} />
+                <Route exact path="/bookmarks" component={Bookmarks} />
+              </div>
+    
+            </Router>
+          </MuiThemeProvider>
+        )
+     
+    }
+    else {
+        return (
+            <MuiThemeProvider muiTheme={getMuiTheme()}>
+              <Router>
+                <div>
+                <div className="row align-center animated bounceInDown" id="nav">
+                <div className="one sixth triple-gapped" >
+                 
+                <Link to="/"> eToolBox </Link>
+                
+                </div>
+                <div className="one sixth triple-gapped skip-three" id="right-top">
+        
+                      <div >
+                        <Link to="/login">/ Log in</Link> 
+                         
+                        <Link to="/signup">Sign up /</Link>
+                      </div>
+                    
+                      </div>
+                  </div>
+                    
+                  <Route exact path="/" component={eToolBox} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
+                  <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
+                  <LoggedOutRoute path="/signup" component={SignUpPage}/>
+                  <Route path="/logout" component={LogoutFunction}/>
+                  
+                </div>
+      
+              </Router>
+            </MuiThemeProvider>
+          
+    )}}
 
-        </Router>
-      </MuiThemeProvider>
-    )
   }
-}
-
 export default App;

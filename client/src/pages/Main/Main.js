@@ -30,31 +30,16 @@ class Main extends Component {
                                     <hr></hr>
                                     <div className="yellow box align-center animated bounceInLeft">
                                     <h2>Today's Tasks</h2> 
-                                    <h3>{currentDay}</h3>
+                                    <h3>Monday</h3>
                                     <List>                 
-                {this.state.tasks.map(task => {                
-                  if (task.label === currentDay && (task.completed) % 2 == 0) {
-                  return (
-                  <ListItem  key={task._id}>                       
+                
+                  <ListItem  >                       
                                      
-                  <Checkbox onClick={() => this.checkTask(task._id)} /> {task.task}
+                  <Checkbox/> Check Emails
                   
-                     
-                     <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                     <DeleteBtn  />
                   </ListItem>
-                  );} 
-                  else if (task.label === currentDay && (task.completed) % 2 == 1){
-                    return (
-                        <ListItem  key={task._id}>                       
-                                           
-                        <Completed onClick={() => this.checkTask(task._id)} /> <strike>{task.task}</strike>
-                        
-                           
-                           <DeleteBtn onClick={() => this.deleteTask(task._id)} />
-                        </ListItem>
-                        );  
-                  }
-                })}
+                   
               </List>
 </div>
 
@@ -92,4 +77,4 @@ class Main extends Component {
     }
 }
 
-export default eToolBox;
+export default Main;
