@@ -3,21 +3,19 @@ const taskController = require("../../controllers/taskController");
 
 const router = new express.Router();
 
-// Matches with "/api/task"
-router.route("/subscriptions")
+router
+  .route("/subscriptions")
   .get(taskController.findAll)
   .post(taskController.create);
 
-  router
+router
   .route("/subscriptions/:id")
   .get(taskController.findById)
   .put(taskController.update)
   .delete(taskController.remove);
 
-// Matches with "/api/task"
-router.route("/getUser")
- 
-    .get(taskController.getUser)
-  ;
+router
+  .route("/getUser")
+  .get(taskController.getUser);
 
 module.exports = router;

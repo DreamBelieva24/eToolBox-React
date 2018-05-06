@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const path = require("path");
 const passport = require('passport');
 const config = require('./config/database.js');
+var configDB = require('./config/database.js');
 const logger = require('morgan')
 const PORT = process.env.PORT || 3001;
-
 const app = express();
 
 // connect to the database and load models
@@ -18,9 +18,11 @@ app.use(logger("dev"));
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
 // tell the app to parse HTTP body messages
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 // pass the passport middleware
 app.use(passport.initialize());
 
@@ -34,9 +36,6 @@ passport.use('local-login', localLoginStrategy);
 const authCheckMiddleware = require('./server/middleware/auth-check');
 app.use('/api', authCheckMiddleware);
 
-
-var configDB = require('./config/database.js');
-
 // routes
 const routes = require("./routes");
 const authRoutes = require('./server/routes/auth');
@@ -47,10 +46,10 @@ app.use(routes);
 
 // Send every request to the React app
 // Define any API routes before this runs
-app.get("*", function(req, res) {
+app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });

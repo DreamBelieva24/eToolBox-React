@@ -1,13 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 
 const Completed = props => (
-  
-      <span className="cbox" {...props}>
-      ☑
-      </span>
-    )
 
-
-
+  <span className="cbox" {...props}>
+    ☑
+  </span>
+)
 
 export default Completed;

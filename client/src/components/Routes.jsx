@@ -1,5 +1,4 @@
 import React from "react";
-
 import Auth from '../utils/Auth';
 import { Route, Redirect } from 'react-router-dom';
 

@@ -1,15 +1,11 @@
 .list-overflow-container {
   max-height: 545px;
-  
   border-radius: 2px;
   overflow-x: hidden;
-  
-  
 }
 
 .list-overflow-container ul {
-  margin: 0;
-  
+  margin: 0; 
 }
 
 .list-overflow-container li {
@@ -17,15 +13,12 @@
   border-left: none;
   border-right: none;
   background-color: #f4d03f;
-  color: #2A878C;
-  
-  
+  color: #2A878C; 
 }
 
 .list-overflow-container li * {
   cursor: pointer;
   font-size:20px;
-  
 }
 
 .list-overflow-container li a {
@@ -34,7 +27,6 @@
 
 .list-overflow-container li:first-child {
   border-top: none;
-  
 }
 
 .list-overflow-container li:last-child {
@@ -43,5 +35,4 @@
 
 .list-group {
   font-size:20px;
-  
 }

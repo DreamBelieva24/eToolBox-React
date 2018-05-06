@@ -1,34 +1,38 @@
 const db = require("../models");
 
-
-
 // Defining methods for the tasksController
 module.exports = {
-  findAll: function(req, res) {
-    
+  findAll: function (req, res) {
+
     db.Task
       .find(req.query)
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-      
+
   },
-  getUser: function(req, res) {
-    console.log('user', req.user)
-    
+
+  getUser: function (req, res) {
+    // console.log('user', req.user)
+
     db.Task
-    .find(req.query)
-    .then(dbModel => res.json(
-        {username: req.user._id,
-          name: req.user.name}))
+      .find(req.query)
+      .then(dbModel => res.json(
+        {
+          username: req.user._id,
+          name: req.user.name
+        }))
   },
-  findById: function(req, res) {
+
+  findById: function (req, res) {
+    
     db.Task
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  create: function(req, res) {
+
+  create: function (req, res) {
 
     db.Task
       .create(req.body)
@@ -38,16 +42,18 @@ module.exports = {
         res.status(422).json(err)
       });
   },
-  update: function(req, res) {
+
+  update: function (req, res) {
+    
     db.Task
-      .findOneAndUpdate({ _id: req.params.id }, 
-        
-        {$inc:{ completed: 1}})
-       
+      .findOneAndUpdate({ _id: req.params.id },
+        { $inc: { completed: 1 } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  remove: function(req, res) {
+
+  remove: function (req, res) {
+    
     db.Task
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
