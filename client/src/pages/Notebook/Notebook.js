@@ -18,7 +18,8 @@ class Notebook extends Component {
         subscriptions: [],
         show: false,
         Subscription: "",
-        name: ""
+        name: "",
+        date: ""
     };
 
     componentDidMount() {
@@ -84,7 +85,8 @@ class Notebook extends Component {
                 task: this.state[name],
                 label: name,
                 username: this.state.username,
-                name: this.state.name
+                name: this.state.name,
+                date: new Date(),
 
             })
                 .then(res => this.loadTask())
@@ -142,7 +144,7 @@ class Notebook extends Component {
                                                     if (task.username === this.state.username && task.label === "Notes") {
                                                         return (
                                                             <ListItem key={task._id}>
-
+                                                            
                                                                 {task.task}
 
                                                             <DeleteBtn onClick={() => this.deleteTask(task._id)} />
