@@ -11,6 +11,7 @@ const taskSchema = new Schema({
   subscription: { type: String, required: false },
   name: { type: String, required: false },
   date: { type: Date, required: false },
+  image: { type: String, required: false },
 });
 
 const Task = mongoose.model("Task", taskSchema);

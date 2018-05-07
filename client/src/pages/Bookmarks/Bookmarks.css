@@ -1,0 +1,3 @@
+a:not(.noicon)[href^="https:"]:after {
+    content: ""
+}
