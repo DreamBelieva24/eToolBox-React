@@ -3,12 +3,13 @@ import DeleteBtn from "../../components/DeleteBtn";
 import Nav from "../../components/Nav";
 import Toolbar from "../../components/Toolbar";
 import Checkbox from "../../components/Checkbox";
+import Starred from "../../components/Starred";
 import Completed from "../../components/Completed";
 import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form";
+import { TextArea, FormBtn } from "../../components/Form";
 // import axios from "axios";
 
 var d = new Date();
@@ -126,9 +127,9 @@ class eToolBox extends Component {
                                             <div className="asphalt box align-center animated bounceInLeft">
                                                  <h1>Quick Look </h1>
                                                     <hr></hr>
-                                                    <div className="yellow box align-center animated bounceInLeft">
-                                                        <h2>Today's Tasks</h2>
-                                                        <h3>{currentDay}</h3>
+                                                    <div className="yellow box align-left animated bounceInLeft">
+                                                        <h2 className="align-center">Today's Tasks</h2>
+                                                        <h3 className="align-center">{currentDay}</h3>
                                                             <List>
                                                                 {this.state.tasks.map(task => {
                                                                     if (task.username === this.state.username && task.label === currentDay && (task.completed) % 2 === 0) {
@@ -139,17 +140,22 @@ class eToolBox extends Component {
                                                                             </ListItem>
                                                                         );
                                                                      }
-                                                                    else if (task.username === this.state.username && task.label === currentDay && (task.completed) % 2 === 1) {
-                                                                        return (
-                                                                            <ListItem key={task._id}>
-                                                                                <Completed onClick={() => this.checkTask(task._id)} /> <strike>{task.task}</strike>
-                                                                                <DeleteBtn onClick={() => this.deleteTask(task._id)} />
-                                                                            </ListItem>
-                                                                            );
-                                                                         }
                                                                     else
                                                                         return null
                                                                 })}
+                                                                {this.state.tasks.map(task => {
+                                                                            if (task.username === this.state.username && task.label === currentDay && (task.completed) % 2 === 1) {
+                                                                                return (
+                                                                                    <ListItem key={task._id}>
+                                                                                        <Completed onClick={() => this.checkTask(task._id)} /> 
+                                                                                            <strike>{task.task}</strike>
+                                                                                    <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                                                                                    </ListItem>
+                                                                                      );
+                                                                                    }
+                                                                                else
+                                                                                    return null
+                                                                            })}
                                                             </List>
                                                     </div>
                                                 </div>
@@ -177,8 +183,26 @@ class eToolBox extends Component {
                                         </div>
                                                 <div className="row align-center triple-padded">
                                                     <div className="five twelfths skip-one gapped">
-                                                        <div className="yellow box align-center triple-padded animated bounceInRight">
-                                                          <a className="orange button" href="/bookmarks"> <h1>Bookmarks</h1> </a>
+                                                        <div className="yellow box align-center animated bounceInRight">
+                                                        <h1 className="align-center">Starred Bookmarks</h1>
+                                                        <hr></hr>
+                                                        <List>
+                                                {this.state.tasks.map(task => {
+                                                    if (task.username === this.state.username && (task.label === "Bookmark2" || task.label === "Bookmark1") && (task.completed) % 2 === 1) {
+                                                        return (
+                                                            <ListItem key={task._id}>
+                                                            <Starred onClick={() => this.checkTask(task._id)} /> 
+                                                                <a href={task.task} target="_blank">
+                                                                    {task.task}
+                                                                </a>
+                                                                <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                                                            </ListItem>
+                                                        );
+                                                    }
+                                                    else    
+                                                        return null
+                                                })}
+                                                </List>
                                                         </div>
                                                     </div>
                                                     <div className="five twelfths gapped ">

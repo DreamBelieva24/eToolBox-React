@@ -20,6 +20,7 @@ import eToolBox from './pages/eToolBox';
 import Schedule from './pages/Schedule';
 import Notebook from './pages/Notebook';
 import Bookmarks from './pages/Bookmarks';
+import TimerPage from './pages/TimerPage';
 import Main from './pages/Main';
 import Auth from './utils/Auth';
 
@@ -66,6 +67,7 @@ class App extends Component {
               <Route exact path="/schedule" component={Schedule} />
               <Route exact path="/notebook" component={Notebook} />
               <Route exact path="/bookmarks" component={Bookmarks} />
+              <Route exact path="/timer" component={TimerPage} />
             </div>
           </Router>
         </MuiThemeProvider>

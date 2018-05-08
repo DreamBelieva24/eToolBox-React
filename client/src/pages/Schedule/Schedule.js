@@ -99,9 +99,9 @@ class Schedule extends Component {
                                             <div className="nine twelfths">
                                                 <div className="asphalt box align-center double-padded animated bounceInLeft">
                                                     <h1>Do Weekly</h1>
-                                                        <div className="row align-center centered">
+                                                        <div className="row align-left centered">
                                                             <div className="yellow box four twelfths" id="day" >
-                                                                <h2> Monday </h2>
+                                                                <h2 className="align-center"> Monday </h2>
                                                                     <List>
                                                                         {this.state.tasks.map(task => {
                                                                             if (task.username === this.state.username && task.label === "Monday" && (task.completed) % 2 === 0) {
@@ -113,20 +113,23 @@ class Schedule extends Component {
                                                                                     </ListItem>
                                                                                     );
                                                                                 }
-                                                                            else if (task.username === this.state.username && task.label === "Monday" && (task.completed) % 2 === 1) {
+                                                                            else
+                                                                                return null
+                                                                        })}
+                                                                        {this.state.tasks.map(task => {
+                                                                            if (task.username === this.state.username && task.label === "Monday" && (task.completed) % 2 === 1) {
                                                                                 return (
                                                                                     <ListItem key={task._id}>
                                                                                         <Completed onClick={() => this.checkTask(task._id)} /> 
                                                                                             <strike>{task.task}</strike>
                                                                                     <DeleteBtn onClick={() => this.deleteTask(task._id)} />
                                                                                     </ListItem>
-                                                                                    );
-                                                                                }
-                                                                            else
-                                                                                return null
-                                                                        })}
-                                                                    </List>
-                                                                    <br></br>
+                                                                                      );
+                                                                                    }
+                                                                                else
+                                                                                    return null
+                                                                            })}
+                                                                        </List>
                                                                     <form>
                                                                         <Input
                                                                             value={this.state.Monday}
@@ -143,7 +146,7 @@ class Schedule extends Component {
                                                                     </form>
                                                                 </div>
                                                             <div className="yellow box four twelfths holder" id="day">
-                                                                <h2>Tuesday</h2>
+                                                                <h2 className="align-center">Tuesday</h2>
                                                                     <List>
                                                                         {this.state.tasks.map(task => {
                                                                             if (task.username === this.state.username && task.label === "Tuesday" && (task.completed) % 2 === 0) {
@@ -155,20 +158,23 @@ class Schedule extends Component {
                                                                                     </ListItem>
                                                                                     );
                                                                                 }
-                                                                            else if (task.username === this.state.username && task.label === "Tuesday" && (task.completed) % 2 === 1) {
+                                                                            else
+                                                                                return null
+                                                                        })}
+                                                                    {this.state.tasks.map(task => {
+                                                                            if (task.username === this.state.username && task.label === "Tuesday" && (task.completed) % 2 === 1) {
                                                                                 return (
                                                                                     <ListItem key={task._id}>
                                                                                         <Completed onClick={() => this.checkTask(task._id)} /> 
                                                                                             <strike>{task.task}</strike>
-                                                                                        <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                                                                                    <DeleteBtn onClick={() => this.deleteTask(task._id)} />
                                                                                     </ListItem>
-                                                                                    );
-                                                                                }
-                                                                            else
-                                                                                return null
-                                                                        })}
-                                                                    </List>
-                                                                    <br></br>
+                                                                                      );
+                                                                                    }
+                                                                                else
+                                                                                    return null
+                                                                            })}
+                                                                        </List>
                                                                     <form>
                                                                         <Input
                                                                             value={this.state.Tuesday}
@@ -185,7 +191,7 @@ class Schedule extends Component {
                                                                     </form>
                                                                 </div>
                                                             <div className="yellow box four twelfths holder" id="day">
-                                                                <h2>Wednesday </h2>
+                                                                <h2 className="align-center">Wednesday </h2>
                                                                     <List>
                                                                         {this.state.tasks.map(task => {
                                                                             if (task.username === this.state.username && task.label === "Wednesday" && (task.completed) % 2 === 0) {
@@ -197,20 +203,23 @@ class Schedule extends Component {
                                                                                     </ListItem>
                                                                                     );
                                                                                 }
-                                                                            else if (task.username === this.state.username && task.label === "Wednesday" && (task.completed) % 2 === 1) {
+                                                                            else
+                                                                                return null
+                                                                            })}
+                                                                    {this.state.tasks.map(task => {
+                                                                            if (task.username === this.state.username && task.label === "Wednesday" && (task.completed) % 2 === 1) {
                                                                                 return (
                                                                                     <ListItem key={task._id}>
                                                                                         <Completed onClick={() => this.checkTask(task._id)} /> 
                                                                                             <strike>{task.task}</strike>
-                                                                                        <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                                                                                    <DeleteBtn onClick={() => this.deleteTask(task._id)} />
                                                                                     </ListItem>
-                                                                                    );
-                                                                                }
-                                                                            else
-                                                                                return null
+                                                                                      );
+                                                                                    }
+                                                                                else
+                                                                                    return null
                                                                             })}
-                                                                    </List>
-                                                                        <br></br>
+                                                                        </List>
                                                                         <form>
                                                                             <Input
                                                                                 value={this.state.Wednesday}
@@ -227,9 +236,9 @@ class Schedule extends Component {
                                                                         </form>
                                                                     </div>
                                                                 </div>
-                                                            <div className="row align-center centered">
+                                                            <div className="row align-left centered">
                                                                 <div className="yellow box four twelfths " id="day" >
-                                                                    <h2>Thursday </h2>
+                                                                    <h2 className="align-center">Thursday </h2>
                                                                         <List>
                                                                             {this.state.tasks.map(task => {
                                                                                 if (task.username === this.state.username && task.label === "Thursday" && (task.completed) % 2 === 0) {
@@ -241,20 +250,23 @@ class Schedule extends Component {
                                                                                         </ListItem>
                                                                                     );
                                                                                 }
-                                                                                else if (task.username === this.state.username && task.label === "Thursday" && (task.completed) % 2 === 1) {
-                                                                                    return (
-                                                                                        <ListItem key={task._id}>
-                                                                                            <Completed onClick={() => this.checkTask(task._id)} /> 
-                                                                                                <strike>{task.task}</strike>
-                                                                                            <DeleteBtn onClick={() => this.deleteTask(task._id)} />
-                                                                                        </ListItem>
-                                                                                    );
-                                                                                }
                                                                                 else
                                                                                     return null
                                                                                 })}
+                                                                       {this.state.tasks.map(task => {
+                                                                            if (task.username === this.state.username && task.label === "Thursday" && (task.completed) % 2 === 1) {
+                                                                                return (
+                                                                                    <ListItem key={task._id}>
+                                                                                        <Completed onClick={() => this.checkTask(task._id)} /> 
+                                                                                            <strike>{task.task}</strike>
+                                                                                    <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                                                                                    </ListItem>
+                                                                                      );
+                                                                                    }
+                                                                                else
+                                                                                    return null
+                                                                            })}
                                                                         </List>
-                                                                            <br></br>
                                                                             <form>
                                                                                 <Input
                                                                                     value={this.state.Thursday}
@@ -271,7 +283,7 @@ class Schedule extends Component {
                                                                             </form>
                                                                         </div>
                                                                     <div className="yellow box four twelfths " id="day">
-                                                                        <h2>Friday</h2>
+                                                                        <h2 className="align-center">Friday</h2>
                                                                             <List>
                                                                                 {this.state.tasks.map(task => {
                                                                                     if (task.username === this.state.username && task.label === "Friday" && (task.completed) % 2 === 0) {
@@ -283,20 +295,23 @@ class Schedule extends Component {
                                                                                             </ListItem>
                                                                                         );
                                                                                     }
-                                                                                    else if (task.username === this.state.username && task.label === "Friday" && (task.completed) % 2 === 1) {
-                                                                                        return (
-                                                                                            <ListItem key={task._id}>
-                                                                                                <Completed onClick={() => this.checkTask(task._id)} /> 
-                                                                                                    <strike>{task.task}</strike>
-                                                                                                <DeleteBtn onClick={() => this.deleteTask(task._id)} />
-                                                                                            </ListItem>
-                                                                                        );
-                                                                                    }
                                                                                     else
                                                                                         return null
                                                                                 })}
-                                                                            </List>
-                                                                            <br></br>
+                                                                            {this.state.tasks.map(task => {
+                                                                            if (task.username === this.state.username && task.label === "Friday" && (task.completed) % 2 === 1) {
+                                                                                return (
+                                                                                    <ListItem key={task._id}>
+                                                                                        <Completed onClick={() => this.checkTask(task._id)} /> 
+                                                                                            <strike>{task.task}</strike>
+                                                                                    <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                                                                                    </ListItem>
+                                                                                      );
+                                                                                    }
+                                                                                else
+                                                                                    return null
+                                                                            })}
+                                                                        </List>
                                                                             <form>
                                                                                 <Input
                                                                                     value={this.state.Friday}
@@ -313,7 +328,7 @@ class Schedule extends Component {
                                                                             </form>
                                                                         </div>
                                                                     <div className="yellow box four twelfths " id="day">
-                                                                        <h2> Sat / Sun</h2>
+                                                                        <h2 className="align-center"> Sat / Sun</h2>
                                                                             <List>
                                                                                 {this.state.tasks.map(task => {
                                                                                     if (task.username === this.state.username && task.label === "Weekend" && (task.completed) % 2 === 0) {
@@ -325,20 +340,23 @@ class Schedule extends Component {
                                                                                             </ListItem>
                                                                                         );
                                                                                     }
-                                                                                    else if (task.label === "Weekend" && (task.completed) % 2 === 1) {
-                                                                                        return (
-                                                                                            <ListItem key={task._id}>
-                                                                                                <Completed onClick={() => this.checkTask(task._id)} /> 
-                                                                                                    <strike>{task.task}</strike>
-                                                                                                <DeleteBtn onClick={() => this.deleteTask(task._id)} />
-                                                                                            </ListItem>
-                                                                                        );
-                                                                                    }
                                                                                     else
                                                                                         return null
                                                                                 })}
-                                                                            </List>
-                                                                            <br></br>
+                                                                            {this.state.tasks.map(task => {
+                                                                            if (task.username === this.state.username && task.label === "Weekend" && (task.completed) % 2 === 1) {
+                                                                                return (
+                                                                                    <ListItem key={task._id}>
+                                                                                        <Completed onClick={() => this.checkTask(task._id)} /> 
+                                                                                            <strike>{task.task}</strike>
+                                                                                    <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                                                                                    </ListItem>
+                                                                                      );
+                                                                                    }
+                                                                                else
+                                                                                    return null
+                                                                            })}
+                                                                        </List>
                                                                             <form>
                                                                                 <Input
                                                                                     value={this.state.Weekend}
@@ -359,8 +377,8 @@ class Schedule extends Component {
                                                             </div>
                                                     <div className="three twelfths" id="doOnce">
                                                         <div className="yellow box align-center double-padded animated bounceInRight">
-                                                            <h1>Do Once</h1>
-                                                                <div className="row align-center centered">
+                                                            <h1 className="align-center">Do Once</h1>
+                                                                <div className="row align-left centered">
                                                                     <div className="yellow box">
                                                                         <List>
                                                                             {this.state.tasks.map(task => {
@@ -373,20 +391,23 @@ class Schedule extends Component {
                                                                                         </ListItem>
                                                                                     );
                                                                                 }
-                                                                                else if (task.username === this.state.username && task.label === "DoOnce" && (task.completed) % 2 === 1) {
-                                                                                    return (
-                                                                                        <ListItem key={task._id}>
-                                                                                            <Completed onClick={() => this.checkTask(task._id)} /> 
-                                                                                                <strike>{task.task}</strike>
-                                                                                            <DeleteBtn onClick={() => this.deleteTask(task._id)} />
-                                                                                        </ListItem>
-                                                                                    );
-                                                                                }
+                                                                                else
+                                                                                    return null
+                                                                            })}
+                                                                        {this.state.tasks.map(task => {
+                                                                            if (task.username === this.state.username && task.label === "DoOnce" && (task.completed) % 2 === 1) {
+                                                                                return (
+                                                                                    <ListItem key={task._id}>
+                                                                                        <Completed onClick={() => this.checkTask(task._id)} /> 
+                                                                                            <strike>{task.task}</strike>
+                                                                                    <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                                                                                    </ListItem>
+                                                                                      );
+                                                                                    }
                                                                                 else
                                                                                     return null
                                                                             })}
                                                                         </List>
-                                                                        <br></br>
                                                                         <form>
                                                                             <Input
                                                                                 value={this.state.DoOnce}

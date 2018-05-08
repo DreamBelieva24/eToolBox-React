@@ -3,6 +3,8 @@ import DeleteBtn from "../../components/DeleteBtn";
 import Nav from "../../components/Nav";
 import API from "../../utils/API";
 import Toolbar from "../../components/Toolbar";
+import Unstarred from "../../components/Unstarred";
+import Starred from "../../components/Starred";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
@@ -14,7 +16,8 @@ class Bookmarks extends Component {
         task: "",
         username: "",
         Bookmark1: "",
-        Bookmark2: ""
+        Bookmark2: "",
+        completed: "",
     };
 
     componentDidMount() {
@@ -48,6 +51,13 @@ class Bookmarks extends Component {
             .catch(err => console.log(err));
     };
 
+    checkTask = id => {
+
+        API.updateTask(id)
+            .then(res => this.loadTask())
+            .catch(err => console.log(err));
+    };
+
     handleInputChange = event => {
         const { value, name } = event.target;
         this.setState({
@@ -64,6 +74,7 @@ class Bookmarks extends Component {
             API.saveTask({
                 task: this.state[name],
                 label: name,
+                completed: false,
                 username: this.state.username
 
             })
@@ -82,14 +93,30 @@ class Bookmarks extends Component {
                                 <Toolbar />
                                     <div className="row align-center">
                                         <div className="five asphalt box twelfths skip-one gapped animated bounceInLeft">
-                                            <div className="align-center">
-                                                <h1>Group One</h1>
-                                            <div className="row align-center centered">
+                                            <div className="align-left">
+                                                <h1 className="align-center">Group One</h1>
+                                            <div className="row centered">
                                             <List>
                                                 {this.state.tasks.map(task => {
-                                                    if (task.username === this.state.username && task.label === "Bookmark1") {
+                                                    if (task.username === this.state.username && task.label === "Bookmark1" && (task.completed) % 2 === 1) {
                                                         return (
                                                             <ListItem key={task._id}>
+                                                            <Starred onClick={() => this.checkTask(task._id)} /> 
+                                                                <a href={task.task} target="_blank">
+                                                                    {task.task}
+                                                                </a>
+                                                                <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                                                            </ListItem>
+                                                        );
+                                                    }
+                                                    else    
+                                                        return null
+                                                })}
+                                                {this.state.tasks.map(task => {
+                                                    if (task.username === this.state.username && task.label === "Bookmark1" && (task.completed) % 2 === 0) {
+                                                        return (
+                                                            <ListItem key={task._id}>
+                                                            <Unstarred onClick={() => this.checkTask(task._id)} /> 
                                                                 <a href={task.task} target="_blank">
                                                                     {task.task}
                                                                 </a>
@@ -120,14 +147,30 @@ class Bookmarks extends Component {
                                         </div>
                                 </div>
                                 <div className="red box five twelfths animated bounceInRight gapped">
-                                    <div className="align-center">
-                                        <h1>Group Two</h1>
-                                        <div className="row align-center centered">
+                                    <div className="align-left">
+                                        <h1 className="align-center">Group Two</h1>
+                                        <div className="row centered">
                                         <List>
                                                 {this.state.tasks.map(task => {
-                                                    if (task.username === this.state.username && task.label === "Bookmark2") {
+                                                    if (task.username === this.state.username && task.label === "Bookmark2" && (task.completed) % 2 === 1) {
                                                         return (
                                                             <ListItem key={task._id}>
+                                                            <Starred onClick={() => this.checkTask(task._id)} /> 
+                                                                <a href={task.task} target="_blank">
+                                                                    {task.task}
+                                                                </a>
+                                                                <DeleteBtn onClick={() => this.deleteTask(task._id)} />
+                                                            </ListItem>
+                                                        );
+                                                    }
+                                                    else    
+                                                        return null
+                                                })}
+                                                {this.state.tasks.map(task => {
+                                                    if (task.username === this.state.username && task.label === "Bookmark2" && (task.completed) % 2 === 0) {
+                                                        return (
+                                                            <ListItem key={task._id}>
+                                                            <Unstarred onClick={() => this.checkTask(task._id)} /> 
                                                                 <a href={task.task} target="_blank">
                                                                     {task.task}
                                                                 </a>

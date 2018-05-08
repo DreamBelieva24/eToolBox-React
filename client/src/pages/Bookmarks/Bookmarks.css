@@ -1,3 +1,15 @@
 a:not(.noicon)[href^="https:"]:after {
     content: ""
 }
+
+a:not(.noicon)[href^="https:"]:before {
+    content: ""
+}
+
+a:not(.noicon)[href^="http:"]:after {
+    content: ""
+}
+
+a:not(.noicon)[href^="http:"]:before {
+    content: ""
+}
