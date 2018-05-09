@@ -23,7 +23,7 @@ class TimerPage extends Component {
         count: ""
     
     };
-    
+
     timer = {};
 
     componentDidMount() {
@@ -82,9 +82,7 @@ class TimerPage extends Component {
     };
 
     tick(id)  {
-        console.log('before', this.state[id])
         this.setState({ [id]: {count: (this.state[id].count + 1)}}, function(){
-            console.log('after', this.state[id])
         })
       }
 
@@ -95,14 +93,20 @@ class TimerPage extends Component {
                 this.setState({ [id]: {count: parseInt(res.data.count)} })
                 if(this.timer[id]) clearInterval(this.timer[id]);
                 this.timer[id] = setInterval(() => this.tick(id), 1000)
-                console.log(res.data)
-                //console.log(res.data.count)
-    })}
+                
+    })
+}
     
     stopTimer = (id) => {
         clearInterval(this.timer[id])
-      }
-    
+        console.log(this.state[id].count)
+        API.updateTask(id, this.state[id].count)
+            .then(res => {
+                
+                console.log(res.data)
+    })
+}
+      
     resetTimer = () => {
         clearInterval(this.timer)
         this.setState({count: 0})

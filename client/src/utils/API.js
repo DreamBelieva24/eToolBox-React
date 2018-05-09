@@ -27,19 +27,18 @@ export default {
 
   // Gets the task with the given id
   getTask: function (id) {
-    console.log(id);
+    
     const token = Auth.getToken();
     const options = {
       method: 'GET',
       headers: { 'Authorization': `bearer ${token}` },
       url: '/api/task/' + id
     };
-    console.log('url', options.url)
+    
     return axios(options);
   },
 
-  updateTask: function (id) {
-    // console.log(id);
+  updateTask: function (id, count) {
     const token = Auth.getToken();
     const options = {
       method: 'PUT',
@@ -67,6 +66,12 @@ export default {
     // console.log(taskData);
     const token = Auth.getToken();
     return axios.post("/api/task", taskData, { headers: { Authorization: `bearer ${token}` } });
+  },
+
+  saveTimer: function (taskData) {
+    // console.log(taskData);
+    const token = Auth.getToken();
+    return axios.post("/api/timer", taskData, { headers: { Authorization: `bearer ${token}` } });
   },
 
   subscribe: function (taskData) {

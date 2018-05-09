@@ -5,6 +5,7 @@ import Toolbar from "../../components/Toolbar";
 import Checkbox from "../../components/Checkbox";
 import Starred from "../../components/Starred";
 import Completed from "../../components/Completed";
+import Timer from "../../components/Timer";
 import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
@@ -33,9 +34,12 @@ class eToolBox extends Component {
         username: "",
         subscriptions: [],
         Subscription: "",
-        name: ""
+        name: "",
+        count: 0
 
     };
+
+    timer = {};
 
     componentDidMount() {
         this.loadTask();
@@ -112,6 +116,25 @@ class eToolBox extends Component {
         this.handleFormSubmit(event)
         alert("Note added to your notebook!")
     }
+
+    tick () {
+        this.setState({count: (this.state.count + 1)})
+      }
+      startTimer () {
+        
+        clearInterval(this.timer)
+        this.timer = setInterval(this.tick.bind(this), 1000)
+      }
+    
+      stopTimer () {
+        clearInterval(this.timer)
+      }
+    
+      resetTimer () {
+        clearInterval(this.timer)
+        this.setState({count: 0})
+      }
+
     render() {
         return (
             <Container fluid>
@@ -206,8 +229,17 @@ class eToolBox extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="five twelfths gapped ">
-                                                        <div className="blue box align-center triple-padded animated bounceInRight">
-                                                            <a className="orange button" href="/timer"> <h1>Timer</h1></a>
+                                                        <div className="blue box align-center animated bounceInRight">
+                                                            <h1>Quick Timer</h1>
+                                                            <hr></hr>
+                                                            <span className='timer centered'>
+                                                                        <h1 className="timer-h1">{this.state.count}</h1>
+                                                                        
+                                                                        <button className="button-me" onClick={() => this.startTimer()}>Start</button>
+                                                                        <button className="button-me" onClick={() => this.stopTimer()}>Stop</button>
+                                                                        <button className="button-me" onClick={this.resetTimer.bind(this)}>Reset</button>
+                                                                        
+                                                                    </span>
                                                         </div>
                                                     </div>
                                                 </div>
