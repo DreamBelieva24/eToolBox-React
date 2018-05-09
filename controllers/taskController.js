@@ -25,10 +25,13 @@ module.exports = {
   },
 
   findById: function (req, res) {
-    
+    //console.log(res)
+    console.log(req.params.id)
     db.Task
-      .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
+      .findById({ _id: req.params.id })
+      .then(dbModel => res.json({
+          count: dbModel.count
+      }))
       .catch(err => res.status(422).json(err));
   },
 

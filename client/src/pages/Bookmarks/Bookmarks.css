@@ -13,3 +13,7 @@ a:not(.noicon)[href^="http:"]:after {
 a:not(.noicon)[href^="http:"]:before {
     content: ""
 }
+
+a:not(.noicon)[target="_blank"]:after, a:not(.noicon)[rel=external]:after {
+    content: ""
+}

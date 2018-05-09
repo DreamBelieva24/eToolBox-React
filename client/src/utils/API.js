@@ -27,9 +27,15 @@ export default {
 
   // Gets the task with the given id
   getTask: function (id) {
-    // console.log(id);
+    console.log(id);
     const token = Auth.getToken();
-    return axios.get("/api/task/" + id, { headers: { Authorization: `bearer ${token}` } });
+    const options = {
+      method: 'GET',
+      headers: { 'Authorization': `bearer ${token}` },
+      url: '/api/task/' + id
+    };
+    console.log('url', options.url)
+    return axios(options);
   },
 
   updateTask: function (id) {
@@ -45,7 +51,7 @@ export default {
 
   // Deletes the task with the given id
   deleteTask: function (id) {
-    // console.log(id);
+    console.log(id);
     const token = Auth.getToken();
     return axios.delete("/api/task/" + id, { headers: { Authorization: `bearer ${token}` } });
   },
