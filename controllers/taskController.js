@@ -50,7 +50,9 @@ module.exports = {
     
     db.Task
       .findOneAndUpdate({ _id: req.params.id },
-        { $inc: { completed: 1 }
+        { $inc: { completed: 1 },
+         $set: { count: req.params.count}
+
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

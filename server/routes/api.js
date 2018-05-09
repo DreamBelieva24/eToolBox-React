@@ -14,6 +14,12 @@ router
   .put(taskController.update)
   .delete(taskController.remove);
 
+  router
+  .route("/task/:id/:count")
+  .get(taskController.findById)
+  .put(taskController.update)
+  .delete(taskController.remove);
+
 router
   .route("/getUser")
   .get(taskController.getUser);

@@ -13,4 +13,10 @@ router
   .put(taskController.update)
   .delete(taskController.remove);
 
+  router
+  .route("/:id/:count")
+  .get(taskController.findById)
+  .put(taskController.update)
+  .delete(taskController.remove);
+
 module.exports = router;

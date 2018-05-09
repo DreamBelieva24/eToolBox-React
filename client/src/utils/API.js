@@ -25,6 +25,12 @@ export default {
 
   },
 
+  getTimers: function () {
+    const token = Auth.getToken();
+    return axios.get("/api/timers", { headers: { Authorization: `bearer ${token}` } });
+
+  },
+
   // Gets the task with the given id
   getTask: function (id) {
     
@@ -43,7 +49,7 @@ export default {
     const options = {
       method: 'PUT',
       headers: { 'Authorization': `bearer ${token}` },
-      url: '/api/task/' + id
+      url: '/api/task/' + id + "/" + count
     };
     return axios(options);
   },
@@ -66,6 +72,12 @@ export default {
     // console.log(taskData);
     const token = Auth.getToken();
     return axios.post("/api/task", taskData, { headers: { Authorization: `bearer ${token}` } });
+  },
+
+  saveTimer: function (taskData) {
+    console.log(taskData);
+    const token = Auth.getToken();
+    return axios.post("/api/timer", taskData, { headers: { Authorization: `bearer ${token}` } });
   },
 
   saveTimer: function (taskData) {

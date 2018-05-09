@@ -24,7 +24,8 @@ class Schedule extends Component {
         task: "",
         label: "",
         completed: "",
-        username: ""
+        username: "",
+        count: ""
     };
 
     componentDidMount() {
@@ -57,7 +58,7 @@ class Schedule extends Component {
 
     checkTask = id => {
 
-        API.updateTask(id)
+        API.updateTask(id, 0)
             .then(res => this.loadTask())
             .catch(err => console.log(err));
     };
@@ -79,7 +80,8 @@ class Schedule extends Component {
                 task: this.state[name],
                 label: name,
                 completed: false,
-                username: this.state.username
+                username: this.state.username,
+                count: 0
             })
                 .then(res => this.loadTask())
                 .catch(err => console.log(err));

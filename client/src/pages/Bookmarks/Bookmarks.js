@@ -18,6 +18,7 @@ class Bookmarks extends Component {
         Bookmark1: "",
         Bookmark2: "",
         completed: "",
+        count: ""
     };
 
     componentDidMount() {
@@ -53,7 +54,7 @@ class Bookmarks extends Component {
 
     checkTask = id => {
 
-        API.updateTask(id)
+        API.updateTask(id, 0)
             .then(res => this.loadTask())
             .catch(err => console.log(err));
     };
