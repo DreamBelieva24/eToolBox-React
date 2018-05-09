@@ -5,7 +5,6 @@ import Toolbar from "../../components/Toolbar";
 import Checkbox from "../../components/Checkbox";
 import Starred from "../../components/Starred";
 import Completed from "../../components/Completed";
-import Timer from "../../components/Timer";
 import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";

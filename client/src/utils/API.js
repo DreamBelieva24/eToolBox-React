@@ -74,18 +74,6 @@ export default {
     return axios.post("/api/task", taskData, { headers: { Authorization: `bearer ${token}` } });
   },
 
-  saveTimer: function (taskData) {
-    console.log(taskData);
-    const token = Auth.getToken();
-    return axios.post("/api/timer", taskData, { headers: { Authorization: `bearer ${token}` } });
-  },
-
-  saveTimer: function (taskData) {
-    // console.log(taskData);
-    const token = Auth.getToken();
-    return axios.post("/api/timer", taskData, { headers: { Authorization: `bearer ${token}` } });
-  },
-
   subscribe: function (taskData) {
     // console.log(taskData);
     const token = Auth.getToken();

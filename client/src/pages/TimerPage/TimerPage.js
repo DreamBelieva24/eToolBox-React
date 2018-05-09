@@ -3,12 +3,10 @@ import DeleteBtn from "../../components/DeleteBtn";
 import Nav from "../../components/Nav";
 import API from "../../utils/API";
 import Toolbar from "../../components/Toolbar";
-import Timer from "../../components/Timer";
-import Unstarred from "../../components/Unstarred";
-import Starred from "../../components/Starred";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
+import "../../components/Timer/Timer.css";
 
 
 
@@ -101,8 +99,8 @@ class TimerPage extends Component {
 
         API.getTask(id)
             .then(res => {
-                this.setState({ [id]: {count: parseInt(res.data.count)} })
-                if(this.timer[id]) clearInterval(this.timer[id]);
+                this.setState({ [id]: {count: parseInt(res.data.count, 10)} })
+                if (this.timer[id]) clearInterval(this.timer[id]);
                 this.timer[id] = setInterval(() => this.tick(id), 1000)
                 
     })
@@ -123,8 +121,10 @@ class TimerPage extends Component {
         clearInterval(this.timer[id])
         console.log(this.state.count)
         API.updateTask(id, 0)
-            .then(res => this.loadTask()
-            )
+            .then(res => {
+                this.setState({ [id]: {count: 0} });
+                this.loadTask()
+            })
         }
     
     render() {
