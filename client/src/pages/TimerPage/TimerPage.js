@@ -99,7 +99,7 @@ class TimerPage extends Component {
 
         API.getTask(id)
             .then(res => {
-                this.setState({ [id]: {count: parseInt(res.data.count, 10)} })
+                this.setState({ [id]: {count: parseInt(res.data.count, 10), isRunning: true} })
                 if (this.timer[id]) clearInterval(this.timer[id]);
                 this.timer[id] = setInterval(() => this.tick(id), 1000)
                 
@@ -110,7 +110,7 @@ class TimerPage extends Component {
         clearInterval(this.timer[id])
         API.updateTask(id, this.state[id].count)
             .then(res => {
-                this.setState({ [id]: {count: this.state[id].count} });
+                this.setState({ [id]: {count: this.state[id].count}, isRunning: false });
                 this.loadTask()
             
             }
@@ -119,14 +119,26 @@ class TimerPage extends Component {
       
     resetTimer = (id) => {
         clearInterval(this.timer[id])
-        console.log(this.state.count)
         API.updateTask(id, 0)
             .then(res => {
                 this.setState({ [id]: {count: 0} });
                 this.loadTask()
             })
         }
+
+    format = count => {
+            //let seconds = Math.floor(count);
+            let minutes = Math.floor(count / 60);
+            let seconds = count % 60;
+            
     
+            minutes = minutes < 1 ? '00' : minutes < 10 ? `0${minutes}` : minutes;
+            seconds = seconds < 10 ? `0${seconds}` : seconds
+            return `${minutes}:${seconds}`;
+        }
+
+
+
     render() {
        return( 
             <Container fluid>
@@ -148,7 +160,7 @@ class TimerPage extends Component {
                                                                     {task.task}
                                                                     <DeleteBtn onClick={() => this.deleteTask(task._id)} />
                                                                     <span className='timer centered'>
-                                                                        <h1 className="timer-h1">{this.state[task._id] ? this.state[task._id].count : task.count}</h1>
+                                                                        <h1 className="timer-h1">{this.format(this.state[task._id] ? this.state[task._id].count : (task.count))}</h1>
                                                                         
                                                                         <button className="button-me" onClick={() => this.startTimer(task._id)}>Start</button>
                                                                         <button className="button-me" onClick={() => this.stopTimer(task._id)}>Stop</button>

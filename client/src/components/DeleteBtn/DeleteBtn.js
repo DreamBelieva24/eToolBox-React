@@ -4,7 +4,7 @@ import "./DeleteBtn.css";
 
 const DeleteBtn = props => (
   <span className="delete-btn" role="img" aria-label="trashcan" {...props}>
-    🗑️
+   &nbsp; 🗑️
   </span>
 );
 

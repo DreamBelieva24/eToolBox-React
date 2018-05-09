@@ -34,7 +34,7 @@ class eToolBox extends Component {
         subscriptions: [],
         Subscription: "",
         name: "",
-        count: 0
+        count: 1500
 
     };
 
@@ -117,22 +117,43 @@ class eToolBox extends Component {
     }
 
     tick () {
-        this.setState({count: (this.state.count + 1)})
+        this.setState({count: (this.state.count - 1)})
+
+        if (this.state.count === 0){
+            alert("Great job! Take a small break.")
+            clearInterval(this.timer)
+        }
       }
-      startTimer () {
-        
+
+    startTimer () {
         clearInterval(this.timer)
         this.timer = setInterval(this.tick.bind(this), 1000)
       }
     
-      stopTimer () {
+    stopTimer () {
         clearInterval(this.timer)
       }
     
-      resetTimer () {
+    resetWork () {
         clearInterval(this.timer)
-        this.setState({count: 0})
+        this.setState({count: 1500})
       }
+
+    resetBreak () {
+        clearInterval(this.timer)
+        this.setState({count: 300})
+      }
+
+    format() {
+
+        let seconds = Math.floor(this.state.count);
+        let minutes = Math.floor(seconds / 60);
+        seconds = seconds % 60;
+        
+        minutes = minutes < 1 ? '00' : minutes < 10 ? `0${minutes}` : minutes;
+        seconds = seconds < 10 ? `0${seconds}` : seconds
+        return `${minutes}:${seconds}`;
+    }
 
     render() {
         return (
@@ -232,11 +253,12 @@ class eToolBox extends Component {
                                                             <h1>Quick Timer</h1>
                                                             <hr></hr>
                                                             <span className='timer centered'>
-                                                                        <h1 className="timer-h1">{this.state.count}</h1>
+                                                                        <h1 className="timer-h1">{this.format(this.state.count)}</h1>
                                                                         
                                                                         <button className="button-me" onClick={() => this.startTimer()}>Start</button>
                                                                         <button className="button-me" onClick={() => this.stopTimer()}>Stop</button>
-                                                                        <button className="button-me" onClick={this.resetTimer.bind(this)}>Reset</button>
+                                                                        <button className="button-me" onClick={this.resetWork.bind(this)}>Work</button>
+                                                                        <button className="button-me" onClick={this.resetBreak.bind(this)}>Break</button>
                                                                         
                                                                     </span>
                                                         </div>

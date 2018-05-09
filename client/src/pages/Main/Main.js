@@ -45,7 +45,9 @@ class Main extends Component {
                                     </div>
                                 <div className="info box five twelfths gapped">
                                     <div className="one fourth"><img className="toolbar" alt="logo" src="images/timer.svg"></img></div>
-                                        <h3>Timer: Coming Soon!
+                                        <h3>Timer: Keep yourself focused by using task timers. Keep track of how long you spend on each
+                                            separate task. Set a quick countdown timer on the Dashboard page to keep your concentration on
+                                            the desired goal. Don't forget to take breaks!
                                         </h3>
                                     </div>
                             </div>

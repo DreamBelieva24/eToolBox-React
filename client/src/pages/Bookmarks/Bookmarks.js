@@ -102,10 +102,10 @@ class Bookmarks extends Component {
                                                     if (task.username === this.state.username && task.label === "Bookmark1" && (task.completed) % 2 === 1) {
                                                         return (
                                                             <ListItem key={task._id}>
-                                                            <Starred onClick={() => this.checkTask(task._id)} /> 
+                                                            <Starred onClick={() => this.checkTask(task._id)} />
                                                                 <a href={task.task} target="_blank">
                                                                     {task.task}
-                                                                </a>
+                                                                </a>&nbsp;
                                                                 <DeleteBtn onClick={() => this.deleteTask(task._id)} />
                                                             </ListItem>
                                                         );
