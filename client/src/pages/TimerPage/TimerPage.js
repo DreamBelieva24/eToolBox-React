@@ -30,10 +30,6 @@ class TimerPage extends Component {
         this.getUser();
     }
 
-   componentWillUnmount () {
-    this.stopTimer();
-  }
-
     getUser = () => {
         API.getUser()
             .then(res => {

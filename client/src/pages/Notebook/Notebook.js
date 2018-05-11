@@ -103,7 +103,7 @@ class Notebook extends Component {
                 subscription: this.state[name]
 
             })
-                .then(res => this.loadTask())
+                .then(res => this.loadSubscriptions())
                 .catch(err => console.log(err));
         }
     };
