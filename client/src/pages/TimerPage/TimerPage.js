@@ -60,12 +60,6 @@ class TimerPage extends Component {
             .catch(err => console.log(err));
     };
 
-    deleteTimer = id => {
-        API.deleteTimer(id)
-            .then(res => this.loadTimers())
-            .catch(err => console.log(err));
-    };
-
     handleInputChange = event => {
         const { value, name } = event.target;
         this.setState({
@@ -102,7 +96,6 @@ class TimerPage extends Component {
                 this.setState({ [id]: {count: parseInt(res.data.count, 10), isRunning: true} })
                 if (this.timer[id]) clearInterval(this.timer[id]);
                 this.timer[id] = setInterval(() => this.tick(id), 1000)
-                
     })
 }
     

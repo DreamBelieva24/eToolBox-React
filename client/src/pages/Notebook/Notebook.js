@@ -194,14 +194,12 @@ class Notebook extends Component {
                                                                                     {task.task}
                                                                                 </ListItem>
                                                                             </div>
-                                                                        )
-                                                                    }
+                                                                        )}
                                                                     else
                                                                         return null
                                                                 })}
                                                         </div>
-                                                        )
-                                                    }
+                                                        )}
                                                 else
                                                     return null
                                                 }
