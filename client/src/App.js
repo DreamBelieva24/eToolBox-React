@@ -51,7 +51,7 @@ class App extends Component {
             <div>
               <div className="row align-center animated bounceInDown" id="nav">
                 <div className="one sixth triple-gapped" >
-                  <Link to="/"> <span class="ec ec-house"></span> eToolBox </Link>
+                  <Link to="/"> <span className="ec ec-house"></span> eToolBox </Link>
                 </div>
                 <div className="one sixth triple-gapped skip-three" id="right-top">
                   <div>

@@ -10,6 +10,7 @@ import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { TextArea, FormBtn } from "../../components/Form";
+import soundFile from './alarm.mp3';
 // import axios from "axios";
 
 var d = new Date();
@@ -17,6 +18,7 @@ var n = d.getDay()
 
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Weekend", "Weekend"]
 var currentDay = weekdays[n - 1] || "Weekend";
+var audio = new Audio(soundFile)
 
 class eToolBox extends Component {
     state = {
@@ -34,12 +36,14 @@ class eToolBox extends Component {
         subscriptions: [],
         Subscription: "",
         name: "",
-        count: 1500
+        count: 1500,
+        play: false,
+        audio: new Audio(soundFile)
 
     };
 
     timer = {};
-
+    
     componentDidMount() {
         this.loadTask();
         this.getUser();
@@ -116,11 +120,19 @@ class eToolBox extends Component {
         alert("Note added to your notebook!")
     }
 
+    togglePlay() {
+        this.setState({ play: !this.state.play });
+        this.togglePlay.bind(this)
+        this.state.play ? audio.play() : audio.pause() ;
+      }
+
+
     tick () {
         this.setState({count: (this.state.count - 1)})
 
         if (this.state.count === 0){
-            alert("Great job! Take a small break.")
+            this.togglePlay()
+            alert("Time's Up!")
             clearInterval(this.timer)
         }
       }
