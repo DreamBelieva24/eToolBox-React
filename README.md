@@ -29,3 +29,7 @@ Bookmarks Page:
 Timers Page:
 
 ![Alt Dashboard](/README/dashboard.png?raw=true)
+
+## Author
+
+* **Jennifer Campbell** - [Github](https://github.com/DreamBelieva24)
